@@ -1,0 +1,42 @@
+@AssignmentService_HostAddress = http://localhost:5122
+
+### Create assignment
+
+POST {{AssignmentService_HostAddress}}/api/Assignments
+Content-Type: application/json
+X-API-Key: DIN_API_NYCKEL
+
+{
+  "courseId": 1,
+  "title": "Test uppgift",
+  "description": "Test utan nyckel",
+  "dueDate": "2026-09-01T23:59:00"
+}
+
+### Get all assignments
+
+GET {{AssignmentService_HostAddress}}/api/Assignments
+
+### Get assignment by id
+
+GET {{AssignmentService_HostAddress}}/api/Assignments/2
+
+### Get assignments by course
+
+GET {{AssignmentService_HostAddress}}/api/Assignments/course/1
+
+### Update assignment
+
+PUT {{AssignmentService_HostAddress}}/api/Assignments/3
+Content-Type: application/json
+
+{
+  "courseId": 3,
+  "title": "Projektplan - uppdaterad",
+  "description": "Uppdaterad beskrivning",
+  "dueDate": "2026-09-05T23:59:00"
+}
+
+### Delete assignment
+
+DELETE {{AssignmentService_HostAddress}}/api/Assignments/2
