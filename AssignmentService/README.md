@@ -1,84 +1,68 @@
 ﻿# AssignmentService
 
-AssignmentService är en microservice för att hantera uppgifter i LMS-projektet.
+AssignmentService är den del av LMS-projektet som sköter uppgifter.
 
-Tjänsten är byggd med ASP.NET Core Web API och använder Entity Framework Core för datalagring.
+Projektet är byggt med ASP.NET Core Web API och använder Entity Framework Core för att spara data.
 
 ## Funktioner
 
-- Hämta alla uppgifter
-- Hämta en specifik uppgift
-- Hämta uppgifter för en viss kurs
-- Skapa uppgift
-- Uppdatera uppgift
-- Ta bort uppgift
-- Swagger/OpenAPI-dokumentation
+* Visa alla uppgifter
+* Visa en specifik uppgift
+* Visa uppgifter för en viss kurs
+* Skapa en uppgift
+* Ändra en uppgift
+* Ta bort en uppgift
 
 ## Teknik
 
-- .NET 10
-- ASP.NET Core Web API
-- Entity Framework Core
-- SQL Server LocalDB
-- Swagger / OpenAPI
+* .NET 10
+* ASP.NET Core Web API
+* Entity Framework Core
+* SQL Server LocalDB
+* Swagger
 
 ## Databas
 
-Lokalt används SQL Server LocalDB.
-
-Databasnamn:
+Lokalt används databasen:
 
 `LmsAssignmentDb`
 
-AssignmentService ansvarar själv för sin data.
-
-`CourseId` lagras som ett vanligt ID och det finns ingen direkt databasrelation till CourseService.
+Varje uppgift har ett `CourseId` som visar vilken kurs den hör till.
 
 ## API
 
-Viktiga endpoints:
+De viktigaste endpointsen är:
 
-- `GET /api/Assignments`
-- `GET /api/Assignments/{id}`
-- `GET /api/Assignments/course/{courseId}`
-- `POST /api/Assignments`
-- `PUT /api/Assignments/{id}`
-- `DELETE /api/Assignments/{id}`
+* `GET /api/Assignments`
+* `GET /api/Assignments/{id}`
+* `GET /api/Assignments/course/{courseId}`
+* `POST /api/Assignments`
+* `PUT /api/Assignments/{id}`
+* `DELETE /api/Assignments/{id}`
 
-GET-endpoints är öppna för läsning.
+GET-anropen är öppna.
 
-POST, PUT och DELETE skyddas med API-nyckel via headern:
+POST, PUT och DELETE skyddas med en API-nyckel.
 
-`X-API-Key`
-
-API-nyckeln lagras lokalt med User Secrets och ska inte sparas i repositoryt.
+API-nyckeln sparas med User Secrets och ligger inte i GitHub.
 
 ## Swagger
 
-När tjänsten körs lokalt finns Swagger på:
+Swagger finns lokalt på:
 
 `http://localhost:5122/swagger`
 
-## Köra projektet lokalt
+## Starta projektet
 
-1. Klona repositoryt.
-2. Öppna projektet i Visual Studio.
-3. Kontrollera connection string i `appsettings.json`.
-4. Lägg till API-nyckeln med User Secrets.
-5. Kör databasmigrationerna vid behov:
+1. Öppna projektet i Visual Studio.
+2. Kontrollera att databasen är skapad.
+3. Lägg in API-nyckeln i User Secrets.
+4. Starta AssignmentService.
 
-`Update-Database`
-
-6. Starta projektet.
-
-AssignmentService kör lokalt på:
+Tjänsten kör lokalt på:
 
 `http://localhost:5122`
 
-## Frontend
-
-Next.js-frontenden kör lokalt på:
+Next.js-frontenden kör på:
 
 `http://localhost:3000`
-
-CORS är konfigurerat så att frontenden kan hämta uppgiftsdata från AssignmentService.
